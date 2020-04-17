@@ -1,0 +1,116 @@
+<ui5-dialog #resultDialog1 header-text="Fraud Detection  (Payment Term Anomaly)">
+    <section class="login-form">
+        <div class="dialogfromdatepicker" style="width:450px">
+            <ui5-label style=" font-weight: bold; color:  rgb(80, 20, 136);">Select From Date </ui5-label><br><br>
+            <ui5-datepicker id="myDatepicker1" placeholder='From Date ' (change)="myDatepicker1($event)">
+            </ui5-datepicker>
+        </div>
+        <br>
+        <br>
+        <div class="dailogtodatepicker" style="width:450px">
+            <ui5-label style=" font-weight: bold; color: rgb(80, 20, 136);">Select To Date </ui5-label><br><br>
+            <ui5-datepicker id="myDatepicker2" placeholder='To Date' (change)="myDatepicker2($event)"></ui5-datepicker>
+        </div>
+    </section>
+    <div slot="footer" style="text-align:right; margin-top: 0.5rem;margin-bottom: 0.5rem; padding-right: 2em;"
+        class="dialog-footer">
+        <ui5-button id="submitbutton" (click)=fundatepicker() design="Emphasized">Submit
+        </ui5-button>
+    </div>
+</ui5-dialog>
+
+<div class="datepicker">
+
+    <div class="fromdatepicker">
+        <ui5-label style=" font-weight: bold; color: white;">Select From Date </ui5-label><br><br>
+        <ui5-datepicker id="myDatepicker1" placeholder='From Date ' (change)="myDatepicker1($event)"></ui5-datepicker>
+    </div>
+    <div class="todatepicker">
+        <ui5-label style=" font-weight: bold; color: white;">Select To Date </ui5-label><br><br>
+        <ui5-datepicker id="myDatepicker2" placeholder='To Date' (change)="myDatepicker2($event)"></ui5-datepicker>
+    </div>
+    <div class="submitdatepicker">
+        <ui5-button id="submitbutton" (click)=fundatepicker() design="Emphasized">Submit
+        </ui5-button>
+    </div>
+</div>
+
+<div class="busyindicator">
+    <ui5-busyindicator style="margin-top: 20rem; "  initial-focus id="busy-container" size="Large" [active]=busy>
+    </ui5-busyindicator>
+</div>
+<div id="myDiv1" hidden>
+    <div class="table-view">
+        <ui5-title level="H2" style="border-bottom: 1px solid lightgray; ;">{{headvar}}</ui5-title>
+
+        <div id="myDIV">
+            <div *ngIf="alertArray !=0 ">
+                <ui5-table class="alert-table" id="table" stickycolumn no-data-text="No Data" show-no-data>
+                    <ui5-table-column *ngFor="let header of object1.keys(alertArray[0]); let i = index" class="column"
+                        slot="columns">
+                        <ui5-checkbox text="{{header}}" (change)="mycheckevent($event)"></ui5-checkbox>
+                    </ui5-table-column>
+                    <ui5-table-row *ngFor="let row of alertArray; let i = index" class="alertTableRow">
+                        <ui5-table-cell *ngFor="let objKey of object1.keys(row); let j = index">
+                            <p style="font-size: large; margin-left: 2rem;">{{ row[objKey] }}</p>
+                        </ui5-table-cell>
+
+                    </ui5-table-row>
+
+                </ui5-table>
+            </div>
+        </div>
+    </div>
+    <div class="contamination">
+        <div class="totalrowcount">
+            <ui5-messagestrip type="Warning" no-icon no-close-button>
+                <ui5-title level="H3">Total Rows Identified : {{alertArray ? alertArray.length :'0'}}</ui5-title>
+            </ui5-messagestrip>
+        </div>
+
+        <div class="totalcolumncount">
+            <ui5-messagestrip type="Warning" no-icon no-close-button>
+                <!-- <ui5-title level="H3">Total Coloumms Identified : {{alertArray ? object1.keys(alertArray[0]).length: '0'}}</ui5-title> -->
+                <ui5-title level="H3">Total columns Processed : {{checkedarray.length>0?checkedarray.length:4}}
+                </ui5-title>
+            </ui5-messagestrip>
+        </div>
+
+        <div>
+            <div class="continput">
+                <ui5-title level="H3"> Contamination Value:</ui5-title>
+                <ui5-input id="contvalue" style="width: 100%; margin-bottom:2% " placeholder="Enter Contamination Value"
+                    (change)="mycontamination($event)"></ui5-input>
+            </div>
+            <div class="contbutton">
+                <ui5-button id="submitcont" (click)=funcontamination() design="Emphasized">Submit
+                </ui5-button>
+            </div>
+        </div>
+
+        <div style="margin-top: 1rem; margin-bottom: 3rem;">
+            <div class="continput">
+                <ui5-title level="H3"> Save Results:</ui5-title>
+                <ui5-input id="savevalue" style="width: 100%; margin-bottom:2% ;" placeholder="Enter runid"
+                    (change)="funrunid($event)"></ui5-input>
+            </div>
+            <div class="contbutton">
+                <ui5-button id="submitsave" (click)=funsaverunid() design="Emphasized">Save To Database
+                </ui5-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="dialog-main-section">
+    <ui5-dialog #resultDialog header-text="Save to Database">
+        <div style="width:30rem">
+            <ui5-title style="text-align:center;" level="H3">{{savestatus}}</ui5-title>
+        </div>
+        <div slot="footer" style="text-align:right; padding-right: 2em;" class="dialog-footer">
+            <div style="flex: 1;"></div>
+            <ui5-button style=" width: 6rem;" (click)=closedialog() design="Emphasized">close</ui5-button>
+        </div>
+    </ui5-dialog>
+</section>

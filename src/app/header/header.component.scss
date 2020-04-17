@@ -1,0 +1,35 @@
+.detail-navbar {
+    padding: 0em;
+    background-color:#031A6B;
+    //  #3d454a;
+
+    margin: 0em;
+    height: 60px;
+    display: grid;
+    grid-template-columns: 88% 12%;
+    .detail-title {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .navbar-title {
+        font-family: Georgia, 'Times New Roman', Times, serif; 
+        color: white;
+      }
+    }
+      // .detail-title,.username{
+      //   display: inline-block;
+      // }
+      .username{
+        padding-top: 10px;
+        color: white;
+        font-family: Georgia, 'Times New Roman', Times, serif; 
+        color: white;
+        // justify-content: flex-end;
+        // text-align: end;
+        .username1,.usericon{
+          display: inline;
+        }
+      }
+    }
