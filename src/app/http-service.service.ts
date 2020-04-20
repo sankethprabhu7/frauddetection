@@ -15,28 +15,12 @@ export class HttpService {
 
   alertname1: string;
 
-  // getPosts(user: string): Observable<[]> {
-  //   const observable = this.http
-  //       .post<any>(this.apiUrl + 'alertapi/ ', {
-  //         recipient: user})
-  //       .pipe(
-  //         map((data: any) => {
-  //           // const details = JSON.parse(data);
-  //           console.log(data);
-  //         //  return  data;
-  //       })
-  //       );
-  //   return  observable;
-  // }
-
-
-
-  // http://fraudaiml1.herokuapp.com/datafetch/?to=2020/03/23&from=2020/01/01&check=3&contamination=0.001&runid=run67
-  // check 1 date input
-  // check 2 contamination value
-  // check 3 is for saving
-
-
+  private userApiUrl = '/services/userapi/currentUser';
+  getLoggedInUser(): Observable<any> {
+      const observable = this.http.get<any>(this.userApiUrl)
+      .pipe(map(data => data.name));
+      return observable;
+    }
 
   getdata(fromdate: string, todate: string): Observable<any> {
     console.log('api is called');
@@ -54,26 +38,6 @@ export class HttpService {
       );
     return observable;
   }
-  // postresult1(fromdate: string, todate: string, contval: number, saverunid: string): Observable<any> {
-  //   console.log('api is called');
-  //   const observable = this.http.post<any>(this.apiUrl + 'datafetch/', {
-  //     from: fromdate,
-  //     to: todate,
-  //     check: '4',
-  //     contamination: contval,
-  //     runid: saverunid,
-  //     columns: ['document_no', 'vendor_no', 'vendor_amount', 'payment_term']
-
-
-  //   })
-  //     .pipe(
-  //       map((data) => {
-  //         // const oHistoryData = data.map(d => d.fields);
-  //         return data;
-  //       })
-  //     );
-  //   return observable;
-  // }
   getresult(fromdate: string, todate: string, contval: number, columnsarray: any): Observable<any> {
     console.log('api is called');
     const observable = this.http.post<any>(this.apiUrl + 'datafetch/', {

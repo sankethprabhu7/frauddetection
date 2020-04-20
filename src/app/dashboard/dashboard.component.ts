@@ -34,8 +34,8 @@ export class DashboardComponent implements OnInit, OnChanges , AfterViewInit {
 
   ngOnInit() {
 
-    const x = document.getElementById('myDiv1');
-    x.style.display = 'none';
+    // const x = document.getElementById('myDiv1');
+    // // x.style.display = 'none';
     this.busy = true;
     setTimeout(() => {
       this.busy = false;
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit, OnChanges , AfterViewInit {
     this.busy = true;
     setTimeout(() => {
       this.busy = false;
-  }, 3000);
+  }, 5000);
     this.mainDialog.nativeElement.close();
 
     this.headvar = 'Data';
@@ -68,11 +68,11 @@ export class DashboardComponent implements OnInit, OnChanges , AfterViewInit {
           const a = JSON.stringify(this.alertArray);
           this.headerCount = Object.keys(a).length;
           console.log('head count ' + this.headerCount);
-          if (resultArray.length > 0) {
-            this.busy = false;
-            const x = document.getElementById('myDiv1');
-            x.style.display = 'block';
-          }
+          // if (resultArray.length > 0) {
+          this.busy = false;
+          const x = document.getElementById('myDiv1');
+          x.style.display = 'block';
+          // }
         });
     this.busy = true;
     setTimeout(() => {

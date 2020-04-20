@@ -44,7 +44,7 @@
         <ui5-title level="H2" style="border-bottom: 1px solid lightgray; ;">{{headvar}}</ui5-title>
 
         <div id="myDIV">
-            <div *ngIf="alertArray !=0 ">
+            <div *ngIf="alertArray !=0 ;  else notShow">
                 <ui5-table class="alert-table" id="table" stickycolumn no-data-text="No Data" show-no-data>
                     <ui5-table-column *ngFor="let header of object1.keys(alertArray[0]); let i = index" class="column"
                         slot="columns">
@@ -59,6 +59,12 @@
 
                 </ui5-table>
             </div>
+            <ng-template #notShow>
+                
+                 No Data Found
+                
+              </ng-template>
+
         </div>
     </div>
     <div class="contamination">
